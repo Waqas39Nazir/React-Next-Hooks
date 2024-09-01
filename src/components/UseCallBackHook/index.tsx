@@ -1,12 +1,21 @@
 "use client";
 import React, { useState, useMemo, useEffect } from "react";
 
-const UseMemoHook = () => {
+const UseCallbackHook = () => {
   const [count, setCount] = useState(10);
+  // OR
+  // const [count, setCount] = useState(() => {
+  //   return 10;
+  // });
 
+  //on every state change a console will be render this means
+  // that on state change on whole component re-renders
   console.log("Re-render - Re-render - Re-render - Re-render");
 
   const decrementHandler = () => {
+    // instead of this
+    // seCount(count - 1); does not immediately update the state, you can test this by calling it twice
+    //use this approach
     setCount((prevState) => prevState - 1);
   };
 
@@ -15,12 +24,16 @@ const UseMemoHook = () => {
   };
 
   // function to slow down things
-  //   const doubleNumber = slowFunction(count);
+  const doubleNumber: any = () => {
+    console.log("I am CALLED without reason");
 
-  const doubleNumber = useMemo(() => {
     // this thing is returned using use memo hook
     return slowFunction(count);
-  }, [count]);
+  };
+  //   const doubleNumber = useMemo(() => {
+  //     // this thing is returned using use memo hook
+  //     return slowFunction(count);
+  //   }, [count]);
 
   //
   const [theme, setTheme] = useState("bg-orange-500");
@@ -61,12 +74,8 @@ const UseMemoHook = () => {
   );
 };
 
-export default UseMemoHook;
+export default UseCallbackHook;
 
 const slowFunction = (number: number) => {
-  for (let i = 0; i < 1000000000; i++) {}
-
-  for (let i = 0; i < 100000000; i++) {}
-
-  return number * 2;
+  return number * 10;
 };

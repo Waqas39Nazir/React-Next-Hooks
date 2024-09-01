@@ -37,6 +37,16 @@ const Header = () => {
         >
           <Link href="/use-memo-hook">Use Memo Hook</Link>
         </li>
+
+        <li
+          className={
+            currentPath === "/use-callback-hook"
+              ? " text-black font-semibold underline"
+              : ""
+          }
+        >
+          <Link href="/use-callback-hook">Use Callback Hook</Link>
+        </li>
       </ul>
     </div>
   );

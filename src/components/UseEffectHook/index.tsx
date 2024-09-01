@@ -29,7 +29,7 @@ const UseEffectHook = () => {
         .then((response) => response.json())
         .then((json) => {
           setContent(json);
-          console.log(json);
+          // console.log(json);
         });
     }
   }, [contentType]);
