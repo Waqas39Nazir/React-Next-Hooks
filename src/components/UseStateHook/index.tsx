@@ -3,6 +3,10 @@ import React, { useState } from "react";
 
 const UseStateHook = () => {
   const [count, setCount] = useState(10);
+  // OR
+  // const [count, setCount] = useState(() => {
+  //   return 10;
+  // });
 
   //on every state change a console will be render this means
   // that on state change on whole component re-renders
