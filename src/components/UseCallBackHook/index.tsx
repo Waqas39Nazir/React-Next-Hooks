@@ -1,21 +1,11 @@
 "use client";
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect, useCallback } from "react";
+import DoubleNumber from "./DoubleNumber";
 
 const UseCallbackHook = () => {
   const [count, setCount] = useState(10);
-  // OR
-  // const [count, setCount] = useState(() => {
-  //   return 10;
-  // });
-
-  //on every state change a console will be render this means
-  // that on state change on whole component re-renders
-  console.log("Re-render - Re-render - Re-render - Re-render");
 
   const decrementHandler = () => {
-    // instead of this
-    // seCount(count - 1); does not immediately update the state, you can test this by calling it twice
-    //use this approach
     setCount((prevState) => prevState - 1);
   };
 
@@ -24,16 +14,22 @@ const UseCallbackHook = () => {
   };
 
   // function to slow down things
-  const doubleNumber: any = () => {
-    console.log("I am CALLED without reason");
+  //   const doubleNumber: any = () => {
+  //     console.log("DOUBLE NUMBER IS CALLED");
 
-    // this thing is returned using use memo hook
-    return slowFunction(count);
-  };
-  //   const doubleNumber = useMemo(() => {
   //     // this thing is returned using use memo hook
   //     return slowFunction(count);
-  //   }, [count]);
+  //   };
+  //to prevent un-necessary re-renders we will use use callback hook
+  const doubleNumber = useCallback(
+    //while using use callback the whole arrow function is returned
+    () => {
+      console.log("DOUBLE NUMBER IS CALLED");
+      // this thing is returned using use memo hook
+      return count * 10;
+    },
+    [count]
+  );
 
   //
   const [theme, setTheme] = useState("bg-orange-500");
@@ -69,7 +65,7 @@ const UseCallbackHook = () => {
         Change Theme
       </button>
 
-      <div className=" p-5 rounded bg-green-500"> {doubleNumber}</div>
+      <DoubleNumber doubleNumber={doubleNumber} />
     </div>
   );
 };
