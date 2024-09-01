@@ -27,6 +27,16 @@ const Header = () => {
         >
           <Link href="/use-effect-hook">Use Effect Hook</Link>
         </li>
+
+        <li
+          className={
+            currentPath === "/use-memo-hook"
+              ? " text-black font-semibold underline"
+              : ""
+          }
+        >
+          <Link href="/use-memo-hook">Use Memo Hook</Link>
+        </li>
       </ul>
     </div>
   );
