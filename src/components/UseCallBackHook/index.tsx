@@ -13,6 +13,7 @@ const UseCallbackHook = () => {
     setCount((prevState) => prevState + 1);
   };
 
+  /******/
   // function to slow down things
   //   const doubleNumber: any = () => {
   //     console.log("DOUBLE NUMBER IS CALLED");
@@ -30,8 +31,19 @@ const UseCallbackHook = () => {
     },
     [count]
   );
+  /******/
 
-  //
+  /******/
+  const [number, setNumber] = useState(0);
+
+  useEffect(() => {
+    console.log("Is function re-created");
+
+    setNumber(doubleNumber());
+  }, [doubleNumber]);
+  /******/
+
+  /******/
   const [theme, setTheme] = useState("bg-orange-500");
 
   const themeChangeHandler = () => {
@@ -43,6 +55,7 @@ const UseCallbackHook = () => {
       }
     });
   };
+  /******/
   return (
     <div className="flex flex-col gap-5">
       <div className="flex w-fit text-black bg-white p-20 rounded-lg flex-row items-center justify-center gap-4">
@@ -60,12 +73,11 @@ const UseCallbackHook = () => {
           +
         </button>
       </div>
-
       <button onClick={themeChangeHandler} className={`p-5 rounded ${theme}`}>
         Change Theme
       </button>
-
-      <DoubleNumber doubleNumber={doubleNumber} />
+      {/* <DoubleNumber doubleNumber={doubleNumber} /> */}
+      <div className=" p-5 rounded bg-green-500"> {number}</div>
     </div>
   );
 };
